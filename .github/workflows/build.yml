@@ -75,6 +75,10 @@ jobs:
       run: |
         docker-compose -f docker-compose.yml --env-file .env up -d --build
 
+    - name: Run pytest
+      run: |
+        docker exec -it backend pytest tests/
+
     - name: Run API Tests
       uses: matt-ball/newman-action@master
       with:

@@ -1,6 +1,7 @@
 version: "3"
 services:
   backend:
+    container_name: backend
     build:
       context: ./src/main
       dockerfile: Dockerfile
@@ -15,6 +16,7 @@ services:
       - backend
 
   postgres:
+    container_name: postgres
     image: library/postgres:13
     container_name: postgres
     restart: on-failure
