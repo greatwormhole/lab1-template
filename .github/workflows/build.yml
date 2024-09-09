@@ -77,7 +77,7 @@ jobs:
 
     - name: Run pytest
       run: |
-        docker exec -it backend pytest tests/
+        docker exec -i backend pytest
 
     - name: Run API Tests
       uses: matt-ball/newman-action@master
