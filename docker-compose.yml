@@ -4,28 +4,35 @@ services:
     build:
       context: ./src/main
       dockerfile: Dockerfile
+    image: persons-service
     env_file:
       - ./.env
     ports:
       - "$BACKEND_PORT:$BACKEND_PORT"
     depends_on:
-      postgres:
-        condition: service_started
-        restart: true
+      - postgres
+    networks:
+      - backend
 
   postgres:
     image: library/postgres:13
     container_name: postgres
     restart: on-failure
     environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: "postgres"
-      POSTGRES_DB: postgres
+      POSTGRES_USER: $POSTGRES_USER
+      POSTGRES_PASSWORD: $POSTGRES_PASSWORD
+      POSTGRES_DB: $POSTGRES_DB
     volumes:
       - db-data:/var/lib/postgresql/data
       - ./postgres/:/docker-entrypoint-initdb.d/
     ports:
-      - "5432:5432"
+      - "$POSTGRES_PORT:$POSTGRES_PORT"
+    networks:
+      - backend
 
 volumes:
   db-data:
+
+networks:
+  backend:
+    driver: bridge
