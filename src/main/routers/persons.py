@@ -68,10 +68,15 @@ async def delete_person(person_id: str, db: Session = Depends(get_db)):
 @router.put(
     path='/{person_id}'
 )
-async def delete_person(person_id: str, person_data: PersonPatch, response: Response, db: Session = Depends(get_db)):
+async def put_person(person_id: str, person_data: PersonPatch, response: Response, db: Session = Depends(get_db)):
     search_for_person = db.query(Person).filter(Person.id == person_id).first()
     if search_for_person:
         raise HTTPException(status_code=403, detail='Person with current id already exists')
+    
+    dict_data = person_data.model_dump()
+    
+    if None in dict_data.values():
+        raise HTTPException(status_code=403, detail='Provided not all data fields')
     
     created_person = Person(id=person_id, **person_data.model_dump())
     
