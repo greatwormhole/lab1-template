@@ -4,5 +4,5 @@ RUN pip install -r requirements.txt
 
 COPY . .
 
-EXPOSE 8000
+EXPOSE ${BACKEND_PORT}
 CMD ["python", "main.py"]

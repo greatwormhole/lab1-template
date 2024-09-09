@@ -7,4 +7,3 @@ venv
 Dockerfile
 docker-compose.yml
 env/
-all-mpnet-base-v2/

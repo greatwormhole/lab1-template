@@ -1,5 +1,18 @@
 version: "3"
 services:
+  backend:
+    build:
+      context: ./src/main
+      dockerfile: Dockerfile
+    env_file:
+      - ./.env
+    ports:
+      - "$BACKEND_PORT:$BACKEND_PORT"
+    depends_on:
+      postgres:
+        condition: service_started
+        restart: true
+
   postgres:
     image: library/postgres:13
     container_name: postgres
