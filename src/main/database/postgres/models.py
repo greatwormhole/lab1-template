@@ -5,7 +5,7 @@ class Person(BaseModel):
     __tablename__ = 'persons'
     
     id = Column(Integer, primary_key=True, index=True)
-    name = Column(String)
+    name = Column(String, index=True)
     address = Column(String)
     work = Column(String)
     age = Column(Integer)
