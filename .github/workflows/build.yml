@@ -75,21 +75,13 @@ jobs:
       run: |
         docker-compose -f docker-compose.yml --env-file .env up -d --build
 
-    - name: asd
-      run: |
-        docker container ls
-
     - name: Run API Tests
       uses: matt-ball/newman-action@master
       with:
         collection: postman/[inst] Lab1.postman_collection.json
         environment: postman/[inst][local] Lab1.postman_environment.json
-        delayRequest: 100
+        delayRequest: 1000
         reporters: '[ "cli" ]'
-
-    - name: Autograding
-      uses: education/autograding@v1
-      continue-on-error: true
 
     - name: Shutdown containers
       run: |
@@ -152,7 +144,7 @@ jobs:
       with:
         collection: postman/[inst] Lab1.postman_collection.json
         environment: postman/[inst][heroku] Lab1.postman_environment.json
-        delayRequest: 100
+        delayRequest: 1000
         reporters: '[ "cli" ]'
 
     - name: Revert server to earlier version if tests fail
