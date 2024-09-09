@@ -73,7 +73,11 @@ jobs:
 
     - name: Run containers
       run: |
-        docker-compose -f docker-compose.yml --env-file .env up -d
+        docker-compose -f docker-compose.yml --env-file .env up -d --build
+
+    - name: asd
+      run: |
+        docker container ls
 
     - name: Run API Tests
       uses: matt-ball/newman-action@master
